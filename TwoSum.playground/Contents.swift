@@ -9,13 +9,13 @@
 // The final complexity is O(n_log_n)
 
 class Solution {
+    
+    var rootNode = Node()
+
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-        
-        var rootNode: Node
         var currentNode: Node
         
         // Assign nums[0] as the root node
-        rootNode = Node()
         rootNode.indexOfArray = 0
         rootNode.value = nums[0]
         
@@ -58,7 +58,7 @@ class Solution {
                     if nil != currentNode.rightNode {
                         currentNode = currentNode.rightNode!
                     } else {
-                        rootNode = newNode
+                        currentNode.rightNode = newNode
                         break
                     }
                 }
