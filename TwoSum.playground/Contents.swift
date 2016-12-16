@@ -26,6 +26,15 @@ class Solution {
                 continue
             }
             
+            let newNode = Node()
+            newNode.indexOfArray = index
+            newNode.value = value
+            
+            let returnAnswer = findAddend(newNode, sum: target, rootNode: rootNode)
+            if [] != returnAnswer {
+                return returnAnswer
+            }
+            
             // Compare value from the root node
             currentNode = rootNode
             while true {
@@ -39,23 +48,17 @@ class Solution {
                 }
 
                 if value < currentNode.value {
-                    if currentNode.leftNode != nil {
+                    if nil != currentNode.leftNode {
                         currentNode = currentNode.leftNode!
                     } else {
-                        rootNode = Node()
-                        rootNode.indexOfArray = index
-                        rootNode.value = value
-                        
+                        currentNode.leftNode = newNode
                         break
                     }
                 } else {
-                    if currentNode.rightNode != nil {
+                    if nil != currentNode.rightNode {
                         currentNode = currentNode.rightNode!
                     } else {
-                        rootNode = Node()
-                        rootNode.indexOfArray = index
-                        rootNode.value = value
-
+                        rootNode = newNode
                         break
                     }
                 }
