@@ -20,3 +20,22 @@ class Solution {
         return 0
     }
 }
+
+import XCTest
+
+class MyTests : XCTestCase {
+    
+    func testFirstCase() {
+        XCTAssertEqual(Solution().lengthOfLongestSubstring("abcabcbb"), 3)
+    }
+    
+    func testSecondCase() {
+        XCTAssertEqual(Solution().lengthOfLongestSubstring("bbbbb"), 1)
+    }
+    
+    func testThirdCase() {
+        XCTAssertEqual(Solution().lengthOfLongestSubstring("pwwkew"), 3)
+    }
+}
+
+TestRunner().runTests(testClass: MyTests.self)
