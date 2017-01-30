@@ -85,6 +85,6 @@ public class ListNode {
 }
 
 var solution = Solution()
-var l1 = solution.numberToListNode(number: 243)
-var l2 = solution.numberToListNode(number: 564)
+var l1 = solution.numberToListNode(number: 342)
+var l2 = solution.numberToListNode(number: 465)
 solution.addTwoNumbers(l1, l2)
