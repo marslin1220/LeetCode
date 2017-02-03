@@ -17,7 +17,28 @@ import XCTest
 
 class Solution {
     func lengthOfLongestSubstring(_ s: String) -> Int {
-        return 0
+        var nonRepeatingCharacters = [Character: Int]()
+        var lengthOfLongestSubstring = 0
+        var beginIndex = 0
+        var charIndex = 0
+        
+        for character in s.characters {
+            
+            if !nonRepeatingCharacters.keys.contains(character) {
+                nonRepeatingCharacters[character] = charIndex
+            } else {
+                beginIndex = nonRepeatingCharacters[character]! + 1
+                nonRepeatingCharacters[character] = charIndex
+            }
+            
+            if lengthOfLongestSubstring < charIndex - beginIndex + 1 {
+                lengthOfLongestSubstring = charIndex - beginIndex + 1
+            }
+            
+            charIndex += 1
+        }
+        
+        return lengthOfLongestSubstring
     }
 }
 
