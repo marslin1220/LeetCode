@@ -27,7 +27,9 @@ class Solution {
             if !nonRepeatingCharacters.keys.contains(character) {
                 nonRepeatingCharacters[character] = charIndex
             } else {
-                beginIndex = nonRepeatingCharacters[character]! + 1
+                if beginIndex < nonRepeatingCharacters[character]! + 1 {
+                    beginIndex = nonRepeatingCharacters[character]! + 1
+                }
                 nonRepeatingCharacters[character] = charIndex
             }
             
@@ -54,6 +56,10 @@ class MyTests : XCTestCase {
     
     func testThirdCase() {
         XCTAssertEqual(Solution().lengthOfLongestSubstring("pwwkew"), 3)
+    }
+    
+    func testFirstFailedCase() {
+        XCTAssertEqual(Solution().lengthOfLongestSubstring("abba"), 2)
     }
 }
 
