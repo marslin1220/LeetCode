@@ -27,15 +27,11 @@ class Solution {
             if !nonRepeatingCharacters.keys.contains(character) {
                 nonRepeatingCharacters[character] = charIndex
             } else {
-                if beginIndex < nonRepeatingCharacters[character]! + 1 {
-                    beginIndex = nonRepeatingCharacters[character]! + 1
-                }
+                beginIndex = max(beginIndex, nonRepeatingCharacters[character]! + 1)
                 nonRepeatingCharacters[character] = charIndex
             }
-            
-            if lengthOfLongestSubstring < charIndex - beginIndex + 1 {
-                lengthOfLongestSubstring = charIndex - beginIndex + 1
-            }
+
+            lengthOfLongestSubstring = max(lengthOfLongestSubstring, charIndex - beginIndex + 1)
             
             charIndex += 1
         }
