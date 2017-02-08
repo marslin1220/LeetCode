@@ -17,7 +17,26 @@ import XCTest
 
 class Solution {
     func lengthOfLongestSubstring(_ s: String) -> Int {
-        return 0
+        var nonRepeatingCharacters = [Character: Int]()
+        var lengthOfLongestSubstring = 0
+        var beginIndex = 0
+        var charIndex = 0
+        
+        for character in s.characters {
+            
+            if !nonRepeatingCharacters.keys.contains(character) {
+                nonRepeatingCharacters[character] = charIndex
+            } else {
+                beginIndex = max(beginIndex, nonRepeatingCharacters[character]! + 1)
+                nonRepeatingCharacters[character] = charIndex
+            }
+
+            lengthOfLongestSubstring = max(lengthOfLongestSubstring, charIndex - beginIndex + 1)
+            
+            charIndex += 1
+        }
+        
+        return lengthOfLongestSubstring
     }
 }
 
@@ -33,6 +52,10 @@ class MyTests : XCTestCase {
     
     func testThirdCase() {
         XCTAssertEqual(Solution().lengthOfLongestSubstring("pwwkew"), 3)
+    }
+    
+    func testFirstFailedCase() {
+        XCTAssertEqual(Solution().lengthOfLongestSubstring("abba"), 2)
     }
 }
 
