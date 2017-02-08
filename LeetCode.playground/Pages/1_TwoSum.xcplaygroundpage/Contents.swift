@@ -1,3 +1,5 @@
+//: [Previous](@previous)
+
 // 1. Transfer the array to a binary tree - O(n)
 //   Node {
 //     parentNode,
@@ -11,7 +13,7 @@
 class Solution {
     
     var rootNode = Node()
-
+    
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         var currentNode: Node
         
@@ -46,7 +48,7 @@ class Solution {
                         return [currentNode.indexOfArray, index]
                     }
                 }
-
+                
                 if value < currentNode.value {
                     if nil != currentNode.leftNode {
                         currentNode = currentNode.leftNode!
@@ -104,7 +106,7 @@ class Solution {
             if currentNode.indexOfArray == traversalNode.indexOfArray {
                 continue
             }
-
+            
             if traversalNode.value == addend {
                 if traversalNode.indexOfArray < currentNode.indexOfArray {
                     return [traversalNode.indexOfArray, currentNode.indexOfArray]
@@ -140,3 +142,5 @@ class Node {
 let solution = Solution()
 //solution.twoSum([3,2,4], 6)
 solution.twoSum([0,4,3,0], 0)
+
+//: [Next](@next)
