@@ -19,23 +19,43 @@ import XCTest
 
 class Solution {
     func longestPalindrome(_ s: String) -> String {
-        var longestPalindromeString = String(s[s.startIndex])
+        guard s.count > 1 else {
+            return s
+        }
         
-        for priorIndex in s.indices {
-            for postIndex in s[s.index(after: priorIndex)..<s.endIndex].indices {
-                let substring = String(s[priorIndex...postIndex])
-                if (isPalindromic(substring) && substring.count > longestPalindromeString.count) {
-                    longestPalindromeString = substring
-                    continue
+        var sChars = [Character](s)
+        let len = sChars.count
+        var maxLen = 1
+        var maxStart = 0
+        var isPalin = Array(repeating: Array(repeating: false, count : len), count : len)
+        
+        // set palindrome whose len is 1
+        for i in 0...len - 1 {
+            isPalin[i][i] = true
+        }
+        
+        // set palindrome whose len is 2
+        for i in 0...len - 2 {
+            if sChars[i] == sChars[i + 1] {
+                isPalin[i][i + 1] = true
+                maxLen = 2
+                maxStart = i
+            }
+        }
+        
+        if len >= 3 {
+            for length in 3...len {
+                for i in 0...len - length {
+                    if sChars[i] == sChars[i + length - 1] && isPalin[i + 1][i + length - 2] {
+                        isPalin[i][i + length - 1] = true
+                        maxLen = length
+                        maxStart = i
+                    }
                 }
             }
         }
         
-        return longestPalindromeString
-    }
-    
-    func isPalindromic(_ s: String) -> Bool {
-        return s == String(s.reversed())
+        return String(sChars[maxStart...maxStart + maxLen - 1])
     }
 }
 
@@ -49,9 +69,9 @@ class MyTests : XCTestCase {
         XCTAssertEqual(Solution().longestPalindrome("cbbd"), "bb")
     }
     
-//    func testLongCase() {
-//        XCTAssertEqual(Solution().longestPalindrome("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"), "ranynar")
-//    }
+    func testLongCase() {
+        XCTAssertEqual(Solution().longestPalindrome("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"), "ranynar")
+    }
 
 }
 
