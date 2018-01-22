@@ -23,39 +23,36 @@ class Solution {
             return s
         }
         
-        var sChars = [Character](s)
-        let len = sChars.count
-        var maxLen = 1
-        var maxStart = 0
-        var isPalin = Array(repeating: Array(repeating: false, count : len), count : len)
+        var start = 0
+        var end = 0
         
-        // set palindrome whose len is 1
-        for i in 0...len - 1 {
-            isPalin[i][i] = true
-        }
+        let sChars = [Character](s)
         
-        // set palindrome whose len is 2
-        for i in 0...len - 2 {
-            if sChars[i] == sChars[i + 1] {
-                isPalin[i][i + 1] = true
-                maxLen = 2
-                maxStart = i
+        for i in 0..<s.count {
+            let len1 = expandAroundCenter(sChars, left: i, right: i)
+            let len2 = expandAroundCenter(sChars, left: i, right: (i + 1))
+            let len = max(len1, len2)
+
+            if len > end - start {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
             }
         }
         
-        if len >= 3 {
-            for length in 3...len {
-                for i in 0...len - length {
-                    if sChars[i] == sChars[i + length - 1] && isPalin[i + 1][i + length - 2] {
-                        isPalin[i][i + length - 1] = true
-                        maxLen = length
-                        maxStart = i
-                    }
-                }
-            }
+        return String(sChars[start...end])
+    }
+
+    func expandAroundCenter(_ chars: [Character], left: Int, right: Int) -> Int {
+
+        var L = left
+        var R = right
+
+        while (L >= 0 && R < chars.count && chars[L] == chars[R]) {
+            L -= 1
+            R += 1
         }
-        
-        return String(sChars[maxStart...maxStart + maxLen - 1])
+
+        return R - L - 1
     }
 }
 
