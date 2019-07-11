@@ -22,19 +22,19 @@ class Solution {
         var beginIndex = 0
         var charIndex = 0
         
-        for character in s.characters {
-            
-            if !nonRepeatingCharacters.keys.contains(character) {
-                nonRepeatingCharacters[character] = charIndex
-            } else {
-                beginIndex = max(beginIndex, nonRepeatingCharacters[character]! + 1)
-                nonRepeatingCharacters[character] = charIndex
-            }
-
-            lengthOfLongestSubstring = max(lengthOfLongestSubstring, charIndex - beginIndex + 1)
-            
-            charIndex += 1
-        }
+//        for character in s.characters {
+//            
+//            if !nonRepeatingCharacters.keys.contains(character) {
+//                nonRepeatingCharacters[character] = charIndex
+//            } else {
+//                beginIndex = max(beginIndex, nonRepeatingCharacters[character]! + 1)
+//                nonRepeatingCharacters[character] = charIndex
+//            }
+//
+//            lengthOfLongestSubstring = max(lengthOfLongestSubstring, charIndex - beginIndex + 1)
+//            
+//            charIndex += 1
+//        }
         
         return lengthOfLongestSubstring
     }
