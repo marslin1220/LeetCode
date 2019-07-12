@@ -6,5 +6,7 @@
         <page name='2_AddTwoNumbers'/>
         <page name='3_LongestSubstringWithoutRepeatingCharacters'/>
         <page name='5_LongestPalindromicSubstring'/>
+        <page name='10_RomanToInteger'/>
+        <page name='15_3Sum'/>
     </pages>
 </playground>
