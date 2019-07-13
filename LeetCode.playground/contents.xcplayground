@@ -10,5 +10,6 @@
         <page name='15_3Sum'/>
         <page name='20_ValidParentheses'/>
         <page name='26_RemoveDuplicatesFromSortedArray   '/>
+        <page name='33_SearchInRotatedSortedArray'/>
     </pages>
 </playground>
