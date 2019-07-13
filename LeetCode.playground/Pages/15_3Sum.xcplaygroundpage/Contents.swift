@@ -16,58 +16,39 @@
 import XCTest
 
 class Solution {
+    //Ref: https://github.com/soapyigu/LeetCode-Swift/blob/master/Array/ThreeSum.swift
     func threeSum(_ nums: [Int]) -> [[Int]] {
+        var result = [[Int]]()
+
         guard nums.count > 2 else {
-            return [[Int]]()
+            return result
         }
 
-        var result = [[Int]]()
         let sortedNums = nums.sorted()
-        let numCount = sortedNums.count
-        var oldFirstNum = Int.max
 
-        for (index, firstNum) in sortedNums.enumerated() {
-            if firstNum > 0 {
-                break
-            }
+        for index in 0...(sortedNums.count - 3) {
+            let remain = -sortedNums[index]
+            var left = index + 1
+            var right = sortedNums.endIndex - 1
 
-            if index + 1 >= numCount - 1 {
-                break
-            }
-
-            if firstNum == oldFirstNum {
+            if index != 0 && sortedNums[index - 1] == sortedNums[index] {
                 continue
             }
 
-            oldFirstNum = firstNum
-
-            let secondLayerNums = sortedNums[(index + 1) ..< numCount]
-
-            var oldSecondNum = Int.max
-            var endIndex = secondLayerNums.endIndex
-
-            for (secondIndex, secondNum) in secondLayerNums.enumerated() {
-                let secondStartIndex = secondLayerNums.startIndex + secondIndex
-
-                if secondStartIndex + 1 >= endIndex {
-                    break
-                }
-
-                if secondNum == oldSecondNum {
-                    continue
-                }
-                oldSecondNum = secondNum
-
-                let rest = secondLayerNums[(secondStartIndex + 1) ..< endIndex]
-                let oppositeNum = -(firstNum + secondNum)
-                if oppositeNum < secondNum {
-                    break
-                }
-
-                if let matchedIndex = rest.firstIndex(of: oppositeNum) {
-                    result.append([firstNum, secondNum, oppositeNum])
-                    endIndex = matchedIndex
-                    continue
+            while left < right {
+                if sortedNums[left] + sortedNums[right] == remain {
+                    result.append([sortedNums[index], sortedNums[left], sortedNums[right]])
+                    repeat {
+                        left += 1
+                    } while left < right && sortedNums[left - 1] == sortedNums[left]
+                } else if sortedNums[left] + sortedNums[right] > remain {
+                    repeat {
+                        right -= 1
+                    } while left < right && sortedNums[right + 1] == sortedNums[right]
+                } else {
+                    repeat {
+                        left += 1
+                    } while left < right && sortedNums[left - 1] == sortedNums[left]
                 }
             }
         }
