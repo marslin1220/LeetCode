@@ -36,12 +36,13 @@ class Solution {
             }
 
             while left < right {
-                if sortedNums[left] + sortedNums[right] == remain {
+                let sum = sortedNums[left] + sortedNums[right]
+
+                if sum == remain {
                     result.append([sortedNums[index], sortedNums[left], sortedNums[right]])
-                    repeat {
-                        left += 1
-                    } while left < right && sortedNums[left - 1] == sortedNums[left]
-                } else if sortedNums[left] + sortedNums[right] > remain {
+                }
+
+                if sum > remain {
                     repeat {
                         right -= 1
                     } while left < right && sortedNums[right + 1] == sortedNums[right]
