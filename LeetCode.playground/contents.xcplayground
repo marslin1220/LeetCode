@@ -12,5 +12,6 @@
         <page name='26_RemoveDuplicatesFromSortedArray   '/>
         <page name='33_SearchInRotatedSortedArray'/>
         <page name='38_CountAndSay'/>
+        <page name='17_LetterCombinationsOfAPhoneNumber'/>
     </pages>
 </playground>
