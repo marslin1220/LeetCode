@@ -13,9 +13,10 @@
         <page name='28_ImplementStrStr'/>
         <page name='33_SearchInRotatedSortedArray'/>
         <page name='38_CountAndSay'/>
-        <page name='49_GroupAnagrams'/>
-        <page name='Sample'/>
-        <page name='67_AddBinary'/>
         <page name='43_MultiplyStrings'/>
+        <page name='49_GroupAnagrams'/>
+        <page name='67_AddBinary'/>
+        <page name='Sample'/>
+        <page name='56_MergeIntervals'/>
     </pages>
 </playground>
