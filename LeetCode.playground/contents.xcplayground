@@ -15,8 +15,9 @@
         <page name='38_CountAndSay'/>
         <page name='43_MultiplyStrings'/>
         <page name='49_GroupAnagrams'/>
+        <page name='56_MergeIntervals'/>
         <page name='67_AddBinary'/>
         <page name='Sample'/>
-        <page name='56_MergeIntervals'/>
+        <page name='50_Pow(x, n)'/>
     </pages>
 </playground>
