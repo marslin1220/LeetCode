@@ -1,24 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='6.0' target-platform='ios'>
-    <pages>
-        <page name='1_TwoSum'/>
-        <page name='2_AddTwoNumbers'/>
-        <page name='3_LongestSubstringWithoutRepeatingCharacters'/>
-        <page name='5_LongestPalindromicSubstring'/>
-        <page name='13_RomanToInteger'/>
-        <page name='15_3Sum'/>
-        <page name='17_LetterCombinationsOfAPhoneNumber'/>
-        <page name='20_ValidParentheses'/>
-        <page name='26_RemoveDuplicatesFromSortedArray   '/>
-        <page name='28_ImplementStrStr'/>
-        <page name='33_SearchInRotatedSortedArray'/>
-        <page name='38_CountAndSay'/>
-        <page name='43_MultiplyStrings'/>
-        <page name='49_GroupAnagrams'/>
-        <page name='50_Pow(x, n)'/>
-        <page name='56_MergeIntervals'/>
-        <page name='67_AddBinary'/>
-        <page name='Sample'/>
-        <page name='69_Sqrt(x)'/>
-    </pages>
-</playground>
+<playground version='6.0' target-platform='ios'/>
