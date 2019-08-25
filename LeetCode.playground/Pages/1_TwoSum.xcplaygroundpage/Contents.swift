@@ -1,33 +1,11 @@
 //: [Previous](@previous)
 
-//Given an array of integers, return indices of the two numbers such that they add up to a specific target.
-//
-//You may assume that each input would have exactly one solution, and you may not use the same element twice.
-//
-//Example:
-//
-//Given nums = [2, 7, 11, 15], target = 9,
-//
-//Because nums[0] + nums[1] = 2 + 7 = 9,
-//return [0, 1].
-//
-//================================================
-//
-// 1. Transfer the array to a binary tree - O(n)
-//   Node {
-//     parentNode,
-//     rightNode, // Great than or equal to parent
-//     leftNode // Less than parent
-//  }
-// 3. Iterate one by one node - O(n)
-// 4. and find the correspond node - O(log_n)
-// The final complexity is O(n_log_n)
+// 1. Two Sum
+// Q: https://leetcode.com/problems/two-sum/
 
 class Solution {
-    
-    var rootNode = Node()
-    
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        var rootNode = Node()
         var currentNode: Node
         
         // Assign nums[0] as the root node
