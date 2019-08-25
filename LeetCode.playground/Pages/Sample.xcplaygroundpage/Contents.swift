@@ -3,43 +3,25 @@
 //1. Two Sum
 //https://leetcode.com/problems/two-sum/
 
-//Runtime: 44 ms, faster than 45.52% of Swift online submissions for Two Sum.
-//Memory Usage: 21.4 MB, less than 5.88% of Swift online submissions for Two Sum.
+// ref: https://github.com/soapyigu/LeetCode-Swift/blob/master/Array/TwoSum.swift
+//Runtime: 36 ms, faster than 68.68% of Swift online submissions for Two Sum.
+//Memory Usage: 21.2 MB, less than 5.88% of Swift online submissions for Two Sum.
 
 import XCTest
 
 class Solution {
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
-        var result = [Int]()
-        let sortedNums = nums.sorted()
-        var right = nums.count - 1
-        var left = 0
-        var hitNum: Int = 0
+        var dict = [Int: Int]()
 
-        while left < right {
-            let leftDiff = target - sortedNums[left]
-            if leftDiff == sortedNums[right] {
-                hitNum = sortedNums[left]
-                break
+        for (i, num) in nums.enumerated() {
+            if let lastIndex = dict[target - num] {
+                return [lastIndex, i]
             }
 
-            if leftDiff > sortedNums[right] {
-                left += 1
-            }
-
-            let rightDiff = target - sortedNums[right]
-            if rightDiff < sortedNums[left] {
-                right -= 1
-            }
+            dict[num] = i
         }
 
-        for (index, num) in nums.enumerated() {
-            if num == hitNum || num == target - hitNum {
-                result.append(index)
-            }
-        }
-
-        return result
+        fatalError("No valid outputs")
     }
 }
 
