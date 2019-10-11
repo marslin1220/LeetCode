@@ -1,9 +1,12 @@
 //: [Previous](@previous)
 
-//You are given two linked lists representing two non-negative numbers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
-//
-//Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
-//Output: 7 -> 0 -> 8
+//2. Add Two Numbers
+//https://leetcode.com/problems/add-two-numbers/
+
+//Runtime: 44 ms, faster than 92.88% of Swift online submissions for Add Two Numbers.
+//Memory Usage: 20.7 MB, less than 11.11% of Swift online submissions for Add Two Numbers.
+
+import XCTest
 
 /**
  * Definition for singly-linked list.
@@ -18,64 +21,45 @@
  */
 class Solution {
     func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
-        
+        guard let _ = l1 else { fatalError("No valid outputs") }
+        guard let _ = l2 else { fatalError("No valid outputs") }
+
         var node1 = l1
         var node2 = l2
-        let sumNode = ListNode(0)
-        var tempNode = sumNode
-        var quotient = 0
+        var carry = 0
+        var result: ListNode? = nil
+        var current: ListNode? = nil
         
-        while node1 != nil || node2 != nil {
-            if node1 != nil {
-                tempNode.val = (node1?.val)!
+        while true {
+            let sum = (node1?.val ?? 0) + (node2?.val ?? 0) + carry
+            let nextNode = ListNode(sum % 10)
+            carry = sum > 9 ? 1 : 0
+
+            if result == nil {
+                result = nextNode
             }
-            
-            if node2 != nil {
-                tempNode.val = tempNode.val + (node2?.val)!
+
+            if current != nil {
+                current?.next = nextNode
             }
-            
-            tempNode.val += quotient
-            
-            if (tempNode.val > 9) {
-                quotient = 1
-                tempNode.val = tempNode.val % 10
-            } else {
-                quotient = 0
-            }
-            
-            if node1?.next != nil || node2?.next != nil {
-                tempNode.next = ListNode(0)
-                tempNode = tempNode.next!
-            } else if quotient != 0 {
-                tempNode.next = ListNode(1)
-                tempNode = tempNode.next!
-            }
-            
+
+            current = nextNode
+
             node1 = node1?.next
             node2 = node2?.next
+
+            if node1 == nil && node2 == nil && carry == 0 {
+                break
+            }
         }
         
-        return sumNode
-    }
-    
-    // for testing only
-    func numberToListNode(number: Int) -> ListNode? {
-        var transferNumber = number
-        
-        let sumNode = ListNode(transferNumber % 10)
-        var tempNode = sumNode
-        while transferNumber > 9 {
-            transferNumber = Int(transferNumber / 10)
-            let childNode = ListNode(transferNumber % 10)
-            tempNode.next = childNode
-            tempNode = childNode
-        }
-        
-        return sumNode
+        return result
     }
 }
 
-public class ListNode {
+// Mark - ListNode Defination
+
+class ListNode {
     public var val: Int
     public var next: ListNode?
     public init(_ val: Int) {
@@ -84,9 +68,57 @@ public class ListNode {
     }
 }
 
-var solution = Solution()
-var l1 = solution.numberToListNode(number: 342)
-var l2 = solution.numberToListNode(number: 465)
-solution.addTwoNumbers(l1, l2)
+extension ListNode {
+    // for testing only
+    convenience init(number: Int) {
+        self.init(number % 10)
+
+        var transferNumber = Int(number / 10)
+        var current: ListNode = self
+        while transferNumber != 0 {
+            current.next = ListNode(transferNumber % 10)
+            current = current.next!
+
+            transferNumber = Int(transferNumber / 10)
+        }
+    }
+}
+
+extension ListNode: Equatable {
+    public static func == (lhs: ListNode, rhs: ListNode) -> Bool {
+        return lhs.val == rhs.val && lhs.next == rhs.next
+    }
+}
+
+extension ListNode: CustomStringConvertible {
+    var description: String {
+        var des = ""
+        var current: ListNode? = self
+        while current != nil {
+            des = "\(des)\(current!.val)"
+            if current?.next != nil {
+                des = "\(des) -> "
+            } else {
+                break
+            }
+
+            current = current?.next
+        }
+
+        return des
+    }
+}
+
+class MyTests : XCTestCase {
+    func test1() {
+        let l1 = ListNode(number: 342)
+        let l2 = ListNode(number: 465)
+        let expected = ListNode(number: 807)
+        let answer = Solution().addTwoNumbers(l1, l2)
+        XCTAssertEqual(answer, expected)
+    }
+}
+
+TestRunner().runTests(testClass: MyTests.self)
 
 //: [Next](@next)
