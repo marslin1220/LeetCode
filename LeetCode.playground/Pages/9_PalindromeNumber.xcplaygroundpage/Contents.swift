@@ -2,25 +2,32 @@
 
 // Q: https://leetcode.com/problems/palindrome-number/
 
-//Runtime: 104 ms, faster than 13.18% of Swift online submissions for Palindrome Number.
-//Memory Usage: 20.9 MB, less than 71.60% of Swift online submissions for Palindrome Number.
+//Runtime: 36 ms, faster than 96.55% of Swift online submissions for Palindrome Number.
+//Memory Usage: 21.1 MB, less than 32.46% of Swift online submissions for Palindrome Number.
 
 import XCTest
 
 class Solution {
     func isPalindrome(_ x: Int) -> Bool {
-        guard x >= 0 else { return false }
-        guard x > 9 else { return true }
+        // Special cases:
+        // As discussed above, when x < 0, x is not a palindrome.
+        // Also if the last digit of the number is 0, in order to be a palindrome,
+        // the first digit of the number also needs to be 0.
+        // Only 0 satisfy this property.
+        guard x >= 0 && (x % 10 != 0 || x == 0) else { return false }
 
         var currentX = x
-        var xArray = [Int]()
+        var revertedX = 0
 
-        while currentX != 0 {
-            xArray.append(currentX % 10)
-            currentX = currentX / 10
+        while currentX > revertedX {
+            revertedX = revertedX * 10 + currentX % 10
+            currentX /= 10
         }
 
-        return xArray == xArray.reversed()
+        // When the length is an odd number, we can get rid of the middle digit by revertedNumber/10
+        // For example when the input is 12321, at the end of the while loop we get x = 12, revertedNumber = 123,
+        // since the middle digit doesn't matter in palidrome(it will always equal to itself), we can simply get rid of it.
+        return currentX == revertedX || currentX == revertedX / 10
     }
 }
 
