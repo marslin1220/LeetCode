@@ -6,6 +6,11 @@ class Solution {
 }
 
 class MyTests : XCTestCase {
+    let solution = Solution()
+    
+    func test1() {
+      XCTAssertEqual(true, true)
+    }
 }
 
 TestRunner().runTests(testClass: MyTests.self)
