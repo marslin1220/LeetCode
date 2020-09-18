@@ -3,27 +3,29 @@
 //66. Plus One
 //https://leetcode.com/problems/plus-one/
 
-//Runtime: 20 ms, faster than 7.62% of Swift online submissions for Plus One.
-//Memory Usage: 21 MB, less than 49.21% of Swift online submissions for Plus One.
+//Runtime: 8 ms, faster than 83.59% of Swift online submissions for Plus One.
+//Memory Usage: 20.9 MB, less than 60.37% of Swift online submissions for Plus One.
 
 import XCTest
 
 class Solution {
     func plusOne(_ digits: [Int]) -> [Int] {
-        var revertedDigits = [Int](digits.reversed())
+        var copiedDigits = digits
 
-        for index in 0...revertedDigits.count {
-            if index == revertedDigits.count {
-                revertedDigits.append(1)
+        for index in 0...(copiedDigits.count - 1) {
+            let backwardIndex = copiedDigits.count - index - 1
+            if copiedDigits[backwardIndex] == 9 {
+                copiedDigits[backwardIndex] = 0
+                if backwardIndex == 0 {
+                    copiedDigits.insert(1, at: 0)
+                }
+            } else {
+                copiedDigits[backwardIndex] += 1
                 break
             }
-            let digit = revertedDigits[index] + 1
-            revertedDigits[index] = digit % 10
-
-            if digit / 10 != 1 { break }
         }
 
-        return [Int](revertedDigits.reversed())
+        return copiedDigits
     }
 }
 
