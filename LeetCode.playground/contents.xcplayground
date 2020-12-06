@@ -38,5 +38,6 @@
         <page name='121_BestTimetoBuyandSellStock'/>
         <page name='Sample'/>
         <page name='12_IntegerToRoman'/>
+        <page name='16_3SumClosest'/>
     </pages>
 </playground>
